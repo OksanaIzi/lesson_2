@@ -11,21 +11,18 @@ import static com.codeborne.selenide.Selenide.*;
 public class AutomationPractiseFormTest {
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         Configuration.startMaximized = true;
     }
-
-
-
     @Test
-    void successfulPractiseFormTest(){
+    void successfulPractiseFormTest() {
         open("https://demoqa.com/automation-practice-form");
 
         $("#firstName").setValue("Test");   //name
         $("#lastName").setValue("Testik");    //lastname
         $("#userEmail").setValue("test@test.com");   //emeil
 
-        $x("//label[text()='Female']").click();   //gender
+        $("[for='gender-radio-2']").click();   //gender
 
         $("#userNumber").setValue("1234567891");   //phone
 
@@ -37,7 +34,7 @@ public class AutomationPractiseFormTest {
         $("#subjectsContainer").click();   //Subject
         $("#subjectsInput").setValue("Physics").pressEnter();
 
-        $x("//label[@for=\"hobbies-checkbox-2\"]").click();
+        $("[for='hobbies-checkbox-2']").click();
         $("#uploadPicture").uploadFromClasspath("1.jpg");
 
         $("#currentAddress").setValue("Test");   //CurrentAddres
@@ -47,17 +44,15 @@ public class AutomationPractiseFormTest {
 
         $("#submit").click();
 
-        $(".modal-content").shouldHave(text("Test"));
-        $(".modal-content").shouldHave(text("Testik"));
-        $(".modal-content").shouldHave(text("test@test.com"));
-        $(".modal-content").shouldHave(text("Female"));
-        $(".modal-content").shouldHave(text("1234567891"));
-        $(".modal-content").shouldHave(text("Physics"));
-        $(".modal-content").shouldHave(text("12 May,1992"));
-        $(".modal-content").shouldHave(text("1.jpg"));
-        $(".modal-content").shouldHave(text("NCR Delhi"));
-
-
-
+        $(".modal-content").shouldHave(text("Test"),
+                text("Testik"),
+                text("test@test.com"),
+                text("Female"),
+                text("1234567891"),
+                text("Physics"),
+                text("12 May,1992"),
+                text("Reading"),
+                text("1.jpg"),
+                text("NCR Delhi"));
     }
 }
